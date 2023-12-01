@@ -1,6 +1,17 @@
 import React, { useState } from "react";
-const Header = ({handleSearch,paginatedProducts,setCurrentPage}) => {
-
+const Header = ({paginatedProducts,setData,data,orginal}) => {
+  const handleChange = (e) => {
+    console.log(paginatedProducts);
+    let search = e.target.value.trim().toLowerCase();
+    if (search == "") {
+      setData([...orginal]);
+    } else {
+      let searchedItems = data.filter((item) =>
+        item.name.trim().toLowerCase().includes(search)
+      );
+      setData([...searchedItems]);
+    }
+  };
   return (
     <div
       style={{
@@ -12,7 +23,7 @@ const Header = ({handleSearch,paginatedProducts,setCurrentPage}) => {
       }}
     >
       <input
-    //    onChange={(e)=>{handleSearch(e.target.value)}}
+       onChange={(e)=>handleChange(e)}
         placeholder="Search..." />
     </div>
   );

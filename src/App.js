@@ -10,6 +10,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostPerPage] = useState(8);
+  const[orginal,setOrginal]=useState([])
   const lastCardIndex = currentPage * postsPerPage;
   const firstCardIndex = lastCardIndex - postsPerPage;
   const paginatedProducts = data.slice(firstCardIndex, lastCardIndex);
@@ -20,17 +21,17 @@ function App() {
     );
     setData(response.data);
     setLoading(false);
+    setOrginal(response.data)
+
   };
   useEffect(() => {
     getData();
   }, []);
-//   const handleSearch=(searchVal)=>{
-//     setData(paginatedProducts.filter((item)=>item.name.trim().toLowerCase().includes(searchVal.trim().toLowerCase())))
-// }
+
   return (
     <>
       <Header
-      //  handleSearch={handleSearch} paginatedProducts={paginatedProducts} setCurrentPage={setCurrentPage}
+       data={data} setData={setData} orginal={orginal} 
         />
       <div className="select__page__post">
         <select
